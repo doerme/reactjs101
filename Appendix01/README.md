@@ -3,7 +3,7 @@
 ![一看就懂的 React ES5、ES6+ 常见用法对照表](./images/react-es6.jpg)
 
 ## 前言
-[React](https://facebook.github.io/react/) 是 Facebook 推出的开源 [JavaScript](https://en.wikipedia.org/wiki/JavaScript) Library。自从 React 正式开源后，React 生态系开始蓬勃发展。事实上，透过学习 React 生态系（ecosystem）的过程中，可以让我们顺便学习现代化 Web 开发的重要观念（例如：ES6、[Webpack](https://github.com/webpack/webpack)、[Babel](https://babeljs.io/)、模组化等），成为更好的开发者。虽然 ES6（ECMAScript2015）、ES7 是未来趋势（本文将 ES6、ES7 称为 ES6+），然而目前在网路上有许多的学习资源仍是以 ES5 为主，导致读者在学习上遇到一些坑洞和迷惑（本文假设读者对于 React 已经有些基本认识，若你对于 React 尚不熟悉，建议先行[阅读官方文件](https://facebook.github.io/react/)和[本篇入门教学](https://scotch.io/tutorials/learning-react-getting-started-and-concepts)）。因此本文希望透过整理在 React 中 ES5、ES6+ 常见用法对照表，让读者们可以在实现功能时（尤其在 [React Native](https://facebook.github.io/react-native/)）可以更清楚两者的差异，无痛转移到 ES6+。
+[React](https://facebook.github.io/react/) 是 Facebook 推出的开源 [JavaScript](https://en.wikipedia.org/wiki/JavaScript) Library。自从 React 正式开源后，React 生态系开始蓬勃发展。事实上，透过学习 React 生态系（ecosystem），让我们顺便学习现代化 Web 开发的重要观念（例如：ES6、[Webpack](https://github.com/webpack/webpack)、[Babel](https://babeljs.io/)、组件化等），成为更好的开发者。虽然 ES6（ECMAScript2015）、ES7 是未来趋势（本文将 ES6、ES7 称为 ES6+），但是目前在网路上有许多的学习资源仍是以 ES5 为主，导致读者在学习上遇到一些坑洞和迷惑（本文假设读者对于 React 已经有些基本认识，若你对于 React 尚不熟悉，建议先行[阅读官方文件](https://facebook.github.io/react/)和[本篇入门教学](https://scotch.io/tutorials/learning-react-getting-started-and-concepts)）。因此本文希望透过整理在 React 中 ES5、ES6+ 常见用法对照表，让读者们可以在实现功能时（尤其在 [React Native](https://facebook.github.io/react-native/)）可以更清楚两者的差异，无痛转移到 ES6+。
 
 ## 大纲
 1. Modules
@@ -18,9 +18,9 @@
 10. Default Parameters
 
 ## 1. Modules
-随著 Web 技术的进展，模组化开发已经成为一个重要课题。关于 JavaScript 模组化我们这边不详述，建议读者参考 [这份投影片](http://huangxuan.me/js-module-7day/#/) 和 [这篇文章](http://justineo.github.io/singles/writing-modular-js/)。
+随着 Web 技术的进展，组件化开发已经成为一个重要课题。关于 JavaScript 组件化我们这边不详述，建议读者参考 [PPT](http://huangxuan.me/js-module-7day/#/) 和 [这篇文章](http://justineo.github.io/singles/writing-modular-js/)。
 
-ES5 若使用 CommonJS 标准，一般使用 `require()` 用法引入模组：
+ES5 若使用 CommonJS 标准，一般使用 `require()` 用法引入模块：
 
 ```js
 var React = require('react');
@@ -51,7 +51,7 @@ export default class MyComponent extends React.Component {
 
 
 ## 2. Classes
-在 React 中元件（Component）是组成视觉页面的基础。在 ES5 中我们使用 `React.createClass()` 来建立 Component，而在 ES6+ 则是用 [Classes](https://babeljs.io/docs/learn-es2015/#classes) 继承 `React.Component` 来建立 Component。若是有写过 Java 等物件导向语言（OOP）的读者应该对于这种写法比较不陌生，不过要注意的是 JavaScript 仍是原型继承类型的物件导向程式语言，只是使用 `Classes` 让物件导向使用上更加直观。对于选择 `class` 使用上还有疑惑的读者建议可以阅读 [React.createClass versus extends React.Component](https://toddmotto.com/react-create-class-versus-component/) 这篇文章。
+在 React 中组件（Component）是组成视觉页面的基础。在 ES5 中我们使用 `React.createClass()` 来建立 Component，而在 ES6+ 则是用 [Classes](https://babeljs.io/docs/learn-es2015/#classes) 继承 `React.Component` 来建立 Component。若是有写过 Java 等面向对象语言（OOP）的读者应该对于这种写法比较不陌生，不过要注意的是 JavaScript 仍是原型继承类型的面向对象程序语言，只是使用 `Classes` 让面向对象使用上更加直观。对于选择 `class` 使用上还有疑惑的读者建议可以阅读 [React.createClass versus extends React.Component](https://toddmotto.com/react-create-class-versus-component/) 这篇文章。
 
 ES5 `React.createClass()` 用法：
 
@@ -119,7 +119,7 @@ class Photo extends React.Component {
 
 
 ## 4. Property initializers
-Component 属性值是资料传递重要的元素，在 ES5 中我们使用 `propTypes ` 和  `getDefaultProps ` 来定义属性（props）的预设值和型别：
+Component 属性值是数据传递重要的元素，在 ES5 中我们使用 `propTypes ` 和  `getDefaultProps ` 来定义属性（props）的预设值和型别：
 
 ```js
 var Todo = React.createClass({
@@ -179,7 +179,7 @@ Todo.propTypes = {
 
 
 ## 5. State
-在 React 中 `Props` 和 `State` 是资料流传递的重要元素，不同的是 `state` 可更动，可以去执行一些运算。在 ES5 中我们使用 `getInitialState ` 去初始化 `state`：
+在 React 中 `Props` 和 `State` 是数据流传递的重要元素，不同的是 `state` 可更改，可以去执行一些运算。在 ES5 中我们使用 `getInitialState ` 去初始化 `state`：
 
 ```js
 var Todo = React.createClass({
@@ -201,7 +201,7 @@ class Todo extends React.Component {
 }
 ```
 
-另外一种写法，使用在建构式初始化。比较推荐使用这种方式，方便做一些运算：
+另外一种写法，使用在构造函数初始化。比较推荐使用这种方式，方便做一些运算：
 
 ```js
 class Todo extends React.Component {
@@ -217,7 +217,7 @@ class Todo extends React.Component {
 
 ## 6. Arrow functions
 
-在讲 `Arrow functions` 之前，我们先聊聊在 React 中 `this` 和它所代表的 `context`。在 ES5 中，我们使用 `React.createClass()` 来建立 Component，而在 `React.createClass()` 下，预设帮你绑定好 `method` 的 `this`，你毋须自行绑定。所以你可以看到像是下面的例子，`callback function` handleButtonClick 中的  `this` 是指到 component 的实例（instance），而非触发事件的物件：
+在讲 `Arrow functions` 之前，我们先聊聊在 React 中 `this` 和它所代表的 `context`。在 ES5 中，我们使用 `React.createClass()` 来建立 Component，而在 `React.createClass()` 下，预设帮你绑定好 `method` 的 `this`，你毋须自行绑定。所以你可以看到像是下面的例子，`callback function` handleButtonClick 中的  `this` 是指到 component 的实例（instance），而非触发事件的对象：
 
 ```js
 var TodoBtn = React.createClass({
@@ -311,7 +311,7 @@ class TodoBtn extends React.Component{
 
 
 ## 7. Dynamic property names & template strings
-以前在 ES5 我们要动态设定属性名称时，往往需要多写几行程式码才能达到目标：
+以前在 ES5 我们要动态设定属性名称时，往往需要多写几行代码才能达到目标：
 
 ```js
 var Todo = React.createClass({
@@ -335,7 +335,7 @@ class Todo extends React.Component {
 }
 ```
 
-Template Strings 是一种语法糖（syntactic sugar），方便我们组织字串（这边也用上 `let`、`const` 变数和常数宣告的方式，和 `var` 的 `function scope` 不同的是它们是属于 `block scope`，亦即生存域存在于 `{}` 间）：
+Template Strings 是一种语法糖（syntactic sugar），方便我们组织字串（这边也用上 `let`、`const` 变数和常数定义的方式，和 `var` 的 `function scope` 不同的是它们是属于 `block scope`，亦即作用域存在于 `{}` 间）：
 
 ```js
 // Interpolate variable bindings
@@ -345,8 +345,8 @@ const name = "Bob", let = "today";
 
 
 ## 8. Destructuring & spread attributes
-在 React 的 Component 中，父元件利用 `props` 来传递资料到子元件是常见作法，然而我们有时会希望只传递部分资料，此时 ES6+ 中的 [Destructuring](https://babeljs.io/docs/learn-es2015/#destructuring) 和 [JSX 的 Spread Attributes
-](https://facebook.github.io/react/docs/jsx-spread.html) ，`...` Spread Attributes 主要是用来迭代物件：
+在 React 的 Component 中，父组件利用 `props` 来传递数据到子组件是常见作法，然而我们有时会希望只传递部分数据，此时 ES6+ 中的 [Destructuring](https://babeljs.io/docs/learn-es2015/#destructuring) 和 [JSX 的 Spread Attributes
+](https://facebook.github.io/react/docs/jsx-spread.html) ，`...` Spread Attributes 主要是用来迭代对象：
 
 ```js
 class Todo extends React.Component {
@@ -399,7 +399,7 @@ var React = require('react-native');
 var View = React.View;
 ```
 
-在 ES6+ 则可以直接使用 `Destructuring` 这种简化方式来引入模组中的元件：
+在 ES6+ 则可以直接使用 `Destructuring` 这种简化方式来引入模块中的组件：
 
 ```
 // 这边等于上面的写法
@@ -430,7 +430,7 @@ export default HelloWorld;
 
 
 ## 9. Mixins
-在 ES5 中，我们可以使用 `Mixins` 的方式去让不同的 Component 共用相似的功能，重用我们的程式码：
+在 ES5 中，我们可以使用 `Mixins` 的方式去让不同的 Component 共用相似的功能，重用我们的代码：
 
 ```js
 var PureRenderMixin = require('react-addons-pure-render-mixin');
@@ -455,7 +455,7 @@ var link = function (height, color) {
 }  
 ```
 
-现在 ES6+ 的函数可以支援预设值，让程式码更为简洁：
+现在 ES6+ 的函数可以支援预设值，让代码更为简洁：
 
 ```js
 var link = function(height = 50, color = 'red') {  
@@ -480,6 +480,6 @@ var link = function(height = 50, color = 'red') {
 11. [ECMAScript 6入门](http://es6.ruanyifeng.com/)
 
 ## :door: 任意门
-| [回首页](https://github.com/kdchang/reactjs101) | [上一章：用 React + Redux + Node（Isomorphic JavaScript）开发食谱分享网站](https://github.com/kdchang/reactjs101/blob/master/Ch10/react-router-redux-node-isomorphic-javascript-open-cook.md) | [下一章：用 React Native + Firebase 开发跨平台行动应用程式](https://github.com/kdchang/reactjs101/blob/master/Appendix02/README.md) |
+| [回首页](https://github.com/kdchang/reactjs101) | [上一章：用 React + Redux + Node（Isomorphic JavaScript）开发食谱分享网站](https://github.com/kdchang/reactjs101/blob/master/Ch10/react-router-redux-node-isomorphic-javascript-open-cook.md) | [下一章：用 React Native + Firebase 开发跨平台行动应用程序](https://github.com/kdchang/reactjs101/blob/master/Appendix02/README.md) |
 
 | [勘误、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
