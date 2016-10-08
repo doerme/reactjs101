@@ -6,7 +6,7 @@
 俗话说工欲善其事，必先利其器。写程式也是一样，搭建好开发环境后可以让自己在后续开发上更加顺利。因此本章接下来将讨论 React 开发环境的两种主要方式：CDN-based、 [webpack](https://webpack.github.io/)（这边我们就先不讨论 [TypeScript](https://www.typescriptlang.org/) 的开发方式）。至于 [browserify](https://webpack.github.io/) 搭配 [Gulp](http://gulpjs.com/) 的方法则会放在补充资料中，让读者阅读完本章后可以开始 React 开发之旅！
 
 ## JavaScript 模块化
-随著网站开发的复杂度提升，许多现代化的网站已不是单纯的网站而已，更像是个富有互动性的网页应用程式（Web App）。为了应付现代化网页应用程式开发的需求，解决一些像是全域变数污染、低维护性等问题，JavaScript 在模块化上也有长足的发展。过去一段时间读者们或许听过像是 `Webpack`、`Browserify`、`module bundlers`、`AMD`、`CommonJS`、`UMD`、`ES6 Module` 等有关 JavaScript 模块化开发的专有名词或工具，在前面一个章节我们也简单介绍了关于 JavaScript 模块化的简单观念和规范介绍。若是读者对于 JavaScript 模块化开发尚不熟悉的话推荐可以参考 [这篇文章](http://huangxuan.me/2015/07/09/js-module-7day/) 和 [这篇文章](https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#.oa2n5s5zt) 当作入门。
+随著网站开发的复杂度提升，许多现代化的网站已不是单纯的网站而已，更像是个富有互动性的网页应用程式（Web App）。为了应付现代化网页应用程式开发的需求，解决一些像是全局变量污染、低维护性等问题，JavaScript 在模块化上也有长足的发展。过去一段时间读者们或许听过像是 `Webpack`、`Browserify`、`module bundlers`、`AMD`、`CommonJS`、`UMD`、`ES6 Module` 等有关 JavaScript 模块化开发的专有名词或工具，在前面一个章节我们也简单介绍了关于 JavaScript 模块化的简单观念和规范介绍。若是读者对于 JavaScript 模块化开发尚不熟悉的话推荐可以参考 [这篇文章](http://huangxuan.me/2015/07/09/js-module-7day/) 和 [这篇文章](https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#.oa2n5s5zt) 当作入门。
 
 总的来说，使用模块化开发 JavaScript 应用程式主要有以下三种好处：
 
@@ -23,8 +23,8 @@
 
 1. 理解 `React` 是 `Component` 导向的应用程式设计
 2. 引入 `react.js`、`react-dom.js`（react 0.14 后将 react-dom 从 react 核心分离，更符合 react 跨平台抽象化的定位）以及 `babel-core-browser` 版 script（可以想成 `babel` 是翻译机，翻译浏览器看不懂的 `JSX` 或 `ES6+` 语法成为浏览器看的懂得的 `JavaScript`。为了提升效率，通常我们都会在伺服器端做转译，这点在 production 环境尤为重要）
-3. 在 `<body>` 撰写 React Component 要插入（mount）指定节点的地方：`<div id="example"></div>`
-4. 透过 `babel` 进行语言翻译 `React JSX` 语法，`babel` 会将其转为浏览器看的懂得 `JavaScript`。其代表意义是：`ReactDOM.render(欲 render 的 Component 或 HTML 元素, 欲插入的位置)`。所以我们可以在浏览器上打开我们的 `hello.html`，就可以看到 `Hello, world!` 。That's it，我们第一个 `React` 应用程式就算完成了！
+3. 在 `<body>` 编写 React Component 要插入（mount）指定节点的地方：`<div id="example"></div>`
+4. 通过 `babel` 进行语言翻译 `React JSX` 语法，`babel` 会将其转为浏览器看的懂得 `JavaScript`。其代表意义是：`ReactDOM.render(想要 render 的 Component 或 HTML 元素, 想要插入的位置)`。所以我们可以在浏览器上打开我们的 `hello.html`，就可以看到 `Hello, world!` 。That's it，我们第一个 `React` 应用程式就算完成了！
 
 ```html
 <!DOCTYPE html>
@@ -40,7 +40,7 @@
   <body>
     <!-- 这边的 id="example" 的 <div> 为 React Component 要插入的地方 -->
     <div id="example"></div>
-    <!-- 以下就是包在 babel（透过进行语言翻译）中的 React JSX 语法，babel 会将其转为浏览器看的懂得 JavaScript -->
+    <!-- 以下就是包在 babel（通过进行语言翻译）中的 React JSX 语法，babel 会将其转为浏览器看的懂得 JavaScript -->
     <script type="text/babel">
       ReactDOM.render(
         <h1>Hello, world!</h1>,
@@ -67,11 +67,11 @@
 - 依 entry 文件不同，把 .js 分拆为多个 .js 档案
 - 整合丰富的 Loader 可以使用（Webpack 本身仅能处理 JavaScript 模块，其余档案如：CSS、Image 需要载入不同 Loader 进行处理）
 
-接下来我们一样透过 Hello World 实例来介绍如何用 Webpack 设置 React 开发环境：
+接下来我们一样通过 Hello World 实例来介绍如何用 Webpack 设置 React 开发环境：
 
-1. 依据你的作业系统安装 [Node](https://nodejs.org/en/) 和 [NPM](https://www.npmjs.com/)（目前版本的 Node 都会内建 NPM）
+1. 依据你的操作系统安装 [Node](https://nodejs.org/en/) 和 [NPM](https://www.npmjs.com/)（目前版本的 Node 都会内建 NPM）
 
-2. 透过 NPM 安装 Webpack（可以 global 或 local project 安装，这边我们使用 local）、webpack loader、webpack-dev-server
+2. 通过 NPM 安装 Webpack（可以 global 或 local project 安装，这边我们使用 local）、webpack loader、webpack-dev-server
 
 	Webpack 中的 loader 类似于 browserify 内的 transforms，但 Webpack 在使用上比较多元，除了 JavaScript loader 外也有 CSS Style 和图片的 loader。此外，`webpack-dev-server` 则可以启动开发用 server，方便我们测试
 
@@ -107,7 +107,7 @@
 	    filename: 'index_bundle.js',
 	  },
 	  module: {
-	  	// loaders 则是放欲使用的 loaders，在这边是使用 babel-loader 将所有 .js（这边用到正则式）相关档案（排除了 npm 安装的套件位置 node_modules）转译成浏览器可以阅读的 JavaScript。preset 则是使用的 babel 转译规则，这边使用 react、es2015
+	  	// loaders 则是放想要使用的 loaders，在这边是使用 babel-loader 将所有 .js（这边用到正则式）相关档案（排除了 npm 安装的套件位置 node_modules）转译成浏览器可以阅读的 JavaScript。preset 则是使用的 babel 转译规则，这边使用 react、es2015
 	    loaders: [
 	      {
 	        test: /\.js$/,
@@ -147,7 +147,7 @@
 	$ npm install --save react react-dom
 	```
 
-6. 撰写 Component（记得把 `index.html` 以及 `index.js` 放到 `app` 文件夹底下喔！）
+6. 编写 Component（记得把 `index.html` 以及 `index.js` 放到 `app` 文件夹底下喔！）
 	`index.html`
 
 	```html 
@@ -159,7 +159,7 @@
 		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	</head>
 	<body>
-		<!-- 欲插入 React Component 的位置 -->
+		<!-- 想要插入 React Component 的位置 -->
 		<div id="app"></div>
 	</body>
 	</html>
