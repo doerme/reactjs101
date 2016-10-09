@@ -3,7 +3,7 @@
 ![ImmutableJS](./images/immutable.png "ImmutableJS")
 
 ## 前言
-一般来说在 JavaScript 中有两种资料类型：Primitive（String、Number、Boolean、null、undefinded）和 Object（Reference）。在 JavaScript 中物件的操作比起 Java 容易很多，但也因为相对弹性不严谨，所以产生了一些问题。在 JavaScript 中的 Object（物件）资料是 Mutable（可以变的），由于是使用 Reference 的方式，所以当修改到复制的值也会修改到原始值。例如下面的 `map2` 值是指到 `map1`，所以当 `map1` 值一改，`map2` 的值也会受影响。 
+一般来说在 JavaScript 中有两种数据类型：Primitive（String、Number、Boolean、null、undefinded）和 Object（Reference）。在 JavaScript 中对象的操作比起 Java 容易很多，但也因为相对弹性不严谨，所以产生了一些问题。在 JavaScript 中的 Object（对象）数据是 Mutable（可以变的），由于是使用 Reference 的方式，所以当修改到复制的值也会修改到原始值。例如下面的 `map2` 值是指到 `map1`，所以当 `map1` 值一改，`map2` 的值也会受影响。 
 
 ```javascript
 var map1 = { a: 1 }; 
@@ -11,11 +11,11 @@ var map2 = map1;
 map2.a = 2
 ```
 
-通常一般作法是使用 `deepCopy` 来避免修改，但这样作法会产生较多的资源浪费。为了很好的解决这个问题，我们可以使用 `Immutable Data`，所谓的 Immutable Data 就是一旦建立，就不能再被修改的数据资料。
+通常一般作法是使用 `deepCopy` 来避免修改，但这样作法会产生较多的资源浪费。为了很好的解决这个问题，我们可以使用 `Immutable Data`，所谓的 Immutable Data 就是一旦建立，就不能再被修改的数据数据。
 
 为了解决这个问题，在 2013 年时 Facebook 工程师 Lee Byron 打造了 [ImmutableJS](https://facebook.github.io/immutable-js/)，但并没有被预设放到 React 工具包中（虽然有提供简化的 Helper），但 `ImmutableJS` 的出现确实解决了 `React` 甚至 `Redux` 所遇到的一些问题。
 
-以下范例即是引入了 `ImmutableJS` 的效果，读者可以发现，虽然我们操作了 `map1` 的值，但会发现原本的 `map1` 并未受到影响（因为任何修改都不会影响到原始资料），虽然使用 `deepCopy` 也可以模拟类似的效果但会浪费过多的计算资源和记忆体，`ImmutableJS` 则可以容易地共享没有被修该到的资料（例如下面的资料 `b` 即为 `map1` 所 `map2` 共享），因而有更好的效能表现。 
+以下范例即是引入了 `ImmutableJS` 的效果，读者可以发现，虽然我们操作了 `map1` 的值，但会发现原本的 `map1` 并未受到影响（因为任何修改都不会影响到原始数据），虽然使用 `deepCopy` 也可以模拟类似的效果但会浪费过多的计算资源和记忆体，`ImmutableJS` 则可以容易地共享没有被修该到的数据（例如下面的数据 `b` 即为 `map1` 所 `map2` 共享），因而有更好的效能表现。 
 
 ```javascript
 import Immutable from 'immutable';
@@ -28,7 +28,7 @@ map2.get('a'); // 2
 ```
 
 ## ImmutableJS 特性介绍
-ImmutableJS 提供了 7 种不可修改的资料类型：`List`、`Map`、`Stack`、`OrderedMap`、`Set`、`OrderedSet`、`Record`。若是对 Immutable 物件操作都会回传一个新值。其中比较常用的有 `List`、`Map` 和 `Set`：
+ImmutableJS 提供了 7 种不可修改的数据类型：`List`、`Map`、`Stack`、`OrderedMap`、`Set`、`OrderedSet`、`Record`。若是对 Immutable 对象操作都会回传一个新值。其中比较常用的有 `List`、`Map` 和 `Set`：
 
 1. Map：类似于 key/value 的 object，在 ES6 也有原生 `Map` 对应
 
@@ -137,7 +137,7 @@ ImmutableJS 提供了 7 种不可修改的资料类型：`List`、`Map`、`Stack
 
 ## ImmutableJS 的特性整理
 1. Persistent Data Structure
-  在 `ImmutableJS` 的世界里，只要资料一被创建，就不能修改，维持 `Immutable`。就不会发生下列的状况：
+  在 `ImmutableJS` 的世界里，只要数据一被创建，就不能修改，维持 `Immutable`。就不会发生下列的状况：
 
   ```javascript
   var obj = {
@@ -162,7 +162,7 @@ ImmutableJS 提供了 7 种不可修改的资料类型：`List`、`Map`、`Stack
   ```
 
 2. Structural Sharing
-  为了维持资料的不可变，又要避免像 `deepCopy` 一样复制所有的节点资料而造成的资源损耗，在 `ImmutableJS` 使用的是 Structural Sharing 特性，亦即如果物件树中一个节点发生变化的话，只会修改这个节点和和受它影响的父节点，其他节点则共享。
+  为了维持数据的不可变，又要避免像 `deepCopy` 一样复制所有的节点数据而造成的资源损耗，在 `ImmutableJS` 使用的是 Structural Sharing 特性，亦即如果对象树中一个节点发生变化的话，只会修改这个节点和和受它影响的父节点，其他节点则共享。
 
   ```javascript
   const obj = {
@@ -190,7 +190,7 @@ ImmutableJS 提供了 7 种不可修改的资料类型：`List`、`Map`、`Stack
   ```
 
 4. 丰富的 API 并提供快速转换原生 JavaScript 的方式
-  在 ImmutableJS 中可以使用 `fromJS()`、`toJS()` 进行 JavaScript 和 ImmutableJS 之间的转换。但由于在转换之间会非常耗费资源，所以若是你决定引入 `ImmutableJS` 的话请尽量维持资料处在 `Immutable` 的状态。
+  在 ImmutableJS 中可以使用 `fromJS()`、`toJS()` 进行 JavaScript 和 ImmutableJS 之间的转换。但由于在转换之间会非常耗费资源，所以若是你决定引入 `ImmutableJS` 的话请尽量维持数据处在 `Immutable` 的状态。
 
 5. 支持 Functional Programming
   `Immutable` 本身就是 Functional Programming（函数式程式设计）的概念，所以在 `ImmutableJS` 中可以使用许多 Functional Programming 的方法，例如：`map`、`filter`、`groupBy`、`reduce`、`find`、`findIndex` 等。
@@ -200,7 +200,7 @@ ImmutableJS 提供了 7 种不可修改的资料类型：`List`、`Map`、`Stack
 ## React 效能优化
 `ImmutableJS` 除了可以和 `Flux/Redux` 整合外，也可以用于基本 react 效能优化。以下是一般使用效能优化的简单方式：
 
-传统 JavaScript 比较方式，若资料型态为 Primitive 就不会有问题：
+传统 JavaScript 比较方式，若数据型态为 Primitive 就不会有问题：
 
 ```javascript
 // 在 shouldComponentUpdate 比较接下来的 props 一否一致，若相同则不重新渲染，提升效能
@@ -209,7 +209,7 @@ shouldComponentUpdate (nextProps) {
 }
 ```
 
-但当比较的是物件的话就会出现问题：
+但当比较的是对象的话就会出现问题：
 
 ```javascript
 // 假设 this.props.value 为 { foo: 'app' }
