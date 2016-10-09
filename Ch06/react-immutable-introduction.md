@@ -11,11 +11,11 @@ var map2 = map1;
 map2.a = 2
 ```
 
-通常一般作法是使用 `deepCopy` 来避免修改，但这样作法会产生较多的资源浪费。为了很好的解决这个问题，我们可以使用 `Immutable Data`，所谓的 Immutable Data 就是一旦建立，就不能再被修改的数据数据。
+通常一般做法是使用 `deepCopy` 来避免修改，但这样做法会产生较多的资源浪费。为了很好的解决这个问题，我们可以使用 `Immutable Data`，所谓的 Immutable Data 就是一旦建立，就不能再被修改的数据数据。
 
 为了解决这个问题，在 2013 年时 Facebook 工程师 Lee Byron 打造了 [ImmutableJS](https://facebook.github.io/immutable-js/)，但并没有被预设放到 React 工具包中（虽然有提供简化的 Helper），但 `ImmutableJS` 的出现确实解决了 `React` 甚至 `Redux` 所遇到的一些问题。
 
-以下范例即是引入了 `ImmutableJS` 的效果，读者可以发现，虽然我们操作了 `map1` 的值，但会发现原本的 `map1` 并未受到影响（因为任何修改都不会影响到原始数据），虽然使用 `deepCopy` 也可以模拟类似的效果但会浪费过多的计算资源和记忆体，`ImmutableJS` 则可以容易地共享没有被修该到的数据（例如下面的数据 `b` 即为 `map1` 所 `map2` 共享），因而有更好的效能表现。 
+以下范例即是引入了 `ImmutableJS` 的效果，读者可以发现，虽然我们操作了 `map1` 的值，但会发现原本的 `map1` 并未受到影响（因为任何修改都不会影响到原始数据），虽然使用 `deepCopy` 也可以模拟类似的效果但会浪费过多的计算资源和内存，`ImmutableJS` 则可以容易地共享没有被修改到的数据（例如下面的数据 `b` 即为 `map1` 所 `map2` 共享），因而有更好的性能表现。 
 
 ```javascript
 import Immutable from 'immutable';
@@ -197,13 +197,13 @@ ImmutableJS 提供了 7 种不可修改的数据类型：`List`、`Map`、`Stack
 
 6. 容易实现 Redo/Undo 历史回顾
 
-## React 效能优化
-`ImmutableJS` 除了可以和 `Flux/Redux` 整合外，也可以用于基本 react 效能优化。以下是一般使用效能优化的简单方式：
+## React 性能优化
+`ImmutableJS` 除了可以和 `Flux/Redux` 整合外，也可以用于基本 react 性能优化。以下是一般使用性能优化的简单方式：
 
 传统 JavaScript 比较方式，若数据型态为 Primitive 就不会有问题：
 
 ```javascript
-// 在 shouldComponentUpdate 比较接下来的 props 一否一致，若相同则不重新渲染，提升效能
+// 在 shouldComponentUpdate 比较接下来的 props 一否一致，若相同则不重新渲染，提升性能
 shouldComponentUpdate (nextProps) {
     return this.props.value !== nextProps.value;
 }
@@ -243,7 +243,7 @@ class FooComponent extends React.Component {
 ```
 
 ## 总结
-虽然 `ImmutableJS` 的引入可以带来许多好处和效能的提升但由于引入整体档案较大且较具侵入性，在引入之前可以自行评估看看是否合适于目前的专案。接下来我们将在后面的章节讲解如何将 `ImmutableJS` 和 `Redux` 整合应用到实务上的范例。 
+虽然 `ImmutableJS` 的引入可以带来许多好处和性能的提升但由于引入整体档案较大且较具侵入性，在引入之前可以自行评估看看是否合适于目前的专案。接下来我们将在后面的章节讲解如何将 `ImmutableJS` 和 `Redux` 整合应用到实务上的范例。 
 
 ## 延伸阅读
 1. [官方网站](https://facebook.github.io/immutable-js/)
@@ -251,7 +251,7 @@ class FooComponent extends React.Component {
 3. [Immutable 详解及 React 中实践](https://github.com/camsong/blog/issues/3)
 4. [为什么需要Immutable.js](http://zhenhua-lee.github.io/react/Immutable.html)
 5. [facebook immutable.js 意义何在，使用场景？](https://www.zhihu.com/question/28016223)
-6. [React 巢状 Component 效能优化](https://blog.wuct.me/react-%E5%B7%A2%E7%8B%80-component-%E6%95%88%E8%83%BD%E5%84%AA%E5%8C%96-b01d8a0d3eff#.3kf4h1xq1)
+6. [React 巢状 Component 性能优化](https://blog.wuct.me/react-%E5%B7%A2%E7%8B%80-component-%E6%95%88%E8%83%BD%E5%84%AA%E5%8C%96-b01d8a0d3eff#.3kf4h1xq1)
 7. [PureRenderMixin](https://facebook.github.io/react/docs/pure-render-mixin.html)
 8. [seamless-immutable](https://github.com/rtfeldman/seamless-immutable)
 9. [Immutable Data Structures and JavaScript](http://jlongster.com/Using-Immutable-Data-Structures-in-JavaScript)
@@ -261,4 +261,4 @@ class FooComponent extends React.Component {
 ## :door: 任意门
 | [回首页](https://github.com/kdchang/reactjs101) | [上一章：React Router 入门实战教学](https://github.com/kdchang/reactjs101/blob/master/Ch05/react-router-introduction.md) | [下一章：Flux 基础概念与实战入门](https://github.com/kdchang/reactjs101/blob/master/Ch07/react-flux-introduction.md) |
 
-| [勘误、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
+| [纠错、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
