@@ -4,7 +4,7 @@
 在前面的章节中我们已经对于 React 和 JSX 有初步的认识，我们也了解到 React Component 事实上可以视为显示 UI 的一个状态机（state machine），而这个状态机根据不同的 state（通过 `setState()` 修改）和 props（由父元素传入），Component 会出现对应的显示结果。本章将使用 [React 官网首页上的范例](https://facebook.github.io/react/index.html)（使用 ES6+）来更进一步说明 Props 和 State 特性及在 React 如何进行事件和表单处理。
 
 ## Props
-首先我们使用 React 官网上的 A Simple Component 来说明 props 的使用方式。由于传入组件的 name 属性为 Mark，故以下程式码将会在浏览器显示 Hello, Mark。针对传入的 props 我们也有验证和预设值的设计，让我们撰写的组件可以更加稳定健壮（robust）。
+首先我们使用 React 官网上的 A Simple Component 来说明 props 的使用方式。由于传入组件的 name 属性为 Mark，故以下代码将会在浏览器显示 Hello, Mark。针对传入的 props 我们也有验证和预设值的设计，让我们撰写的组件可以更加稳定健壮（robust）。
 
 HTML Markup：
 
@@ -31,7 +31,7 @@ app.js，使用 ES6 Class Component 写法：
 ```javascript
 class HelloMessage extends React.Component {
 	constructor(props) {
-		// 对于 OOP 物件导向程式设计熟悉的读者应该对于 constructor 建构子的使用不陌生，事实上它是 ES6 的语法糖，骨子里还是 portotype based 物件导向程式语言。通过 extends 可以继承 React.Component 父类别。super 方法可以呼叫继承父类别的建构子
+		// 对于 OOP 面向对象程序设计熟悉的读者应该对于 constructor 建构子的使用不陌生，事实上它是 ES6 的语法糖，骨子里还是 portotype based 面向对象程序语言。通过 extends 可以继承 React.Component 父类别。super 方法可以调用继承父类别的建构子
 		super(props);
 		this.state = {}
 	}
@@ -81,7 +81,7 @@ ReactDOM.render(<HelloMessage name="Mark" />, document.getElementById('app'));
 <a class="jsbin-embed" href="http://jsbin.com/wadice/embed?html,js,console,output">A Component Using External Plugins on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.39.12"></script>
 
 ## State
-接下来我们将使用 A Stateful Component 这个范例来讲解 State 的用法。在 React Component 可以自己管理自己的内部 state，并用 `this.state` 来存取 state。当 `setState()` 方法更新了 state 后将重新呼叫 `render()` 方法，重新绘制 component 内容。以下范例是一个每 1000 毫秒（等于1秒）就会加一的累加器。由于这个范例是 Stateful Component 因此仅使用 ES6 Class Component，而不使用 Functional Component。
+接下来我们将使用 A Stateful Component 这个范例来讲解 State 的用法。在 React Component 可以自己管理自己的内部 state，并用 `this.state` 来存取 state。当 `setState()` 方法更新了 state 后将重新调用 `render()` 方法，重新绘制 component 内容。以下范例是一个每 1000 毫秒（等于1秒）就会加一的累加器。由于这个范例是 Stateful Component 因此仅使用 ES6 Class Component，而不使用 Functional Component。
 
 HTML Markup：
 
@@ -115,11 +115,11 @@ class Timer extends React.Component {
 			secondsElapsed: 0,
 		}
 	}
-	// 累加器方法，每一秒被呼叫后就会使用 setState() 更新内部 state，让 Component 重新 render
+	// 累加器方法，每一秒被调用后就会使用 setState() 更新内部 state，让 Component 重新 render
 	tick() {
 	    this.setState({secondsElapsed: this.state.secondsElapsed + 1});
 	}
-	// componentDidMount 为 component 生命周期中阶段 component 已插入节点的阶段，通常一些非同步操作都会放置在这个阶段。这便是每1秒钟会去呼叫 tick 方法
+	// componentDidMount 为 component 生命周期中阶段 component 已插入节点的阶段，通常一些非同步操作都会放置在这个阶段。这便是每1秒钟会去调用 tick 方法
 	componentDidMount() {
 	    this.interval = setInterval(this.tick, 1000);
 	}
@@ -139,7 +139,7 @@ ReactDOM.render(<Timer />, document.getElementById('app'));
 ```
 
 ## 事件处理（Event Handle）
-在前面的内容我们已经学会如何使用 props 和 state，接下来我们要更进一步学习在 React 内如何进行事件处理。下列将使用 React 官网的 An Application 当做例子，实作出一个简单的 TodoApp。
+在前面的内容我们已经学会如何使用 props 和 state，接下来我们要更进一步学习在 React 内如何进行事件处理。下列将使用 React 官网的 An Application 当做例子，实践出一个简单的 TodoApp。
 
 HTML Markup：
 
@@ -278,7 +278,7 @@ ReactDOM.render(<MarkdownEditor />, document.getElementById('app'));
 ```
 
 ## 总结
-以上通过几个 React 官网首页上的范例介绍了 Props 和 State 特性及在 React 如何进行事件和表单处理这些 React 中核心的问题，若还不熟悉的读者建议重新亲自动手照著范例中的程式码敲过一遍，也可以使用像 [jsbin](http://jsbin.com/) 这样所见即所得的工具来练习，更能熟悉相关语法和 API 喔！接下来我们将探讨 Component 的生命周期。
+以上通过几个 React 官网首页上的范例介绍了 Props 和 State 特性及在 React 如何进行事件和表单处理这些 React 中核心的问题，若还不熟悉的读者建议重新亲自动手照著范例中的代码敲过一遍，也可以使用像 [jsbin](http://jsbin.com/) 这样所见即所得的工具来练习，更能熟悉相关语法和 API 喔！接下来我们将探讨 Component 的生命周期。
 
 ## 延伸阅读
 1. [React 官方网站](https://facebook.github.io/react/index.html)
@@ -287,4 +287,4 @@ ReactDOM.render(<MarkdownEditor />, document.getElementById('app'));
 ## :door: 任意门
 | [回首页](https://github.com/kdchang/reactjs101) | [上一章：JSX 简明入门教学指南](https://github.com/kdchang/reactjs101/blob/master/Ch03/react-jsx-introduction.md) | [下一章：React Component 规格与生命周期（Life Cycle）](https://github.com/kdchang/reactjs101/blob/master/Ch04/react-component-life-cycle.md) |
 
-| [勘误、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
+| [纠错、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
