@@ -1,6 +1,6 @@
 # React Router 入门实战教学
 
-![React Router 资料夹结构](./images/react-router.jpg "React Router 入门实战教学")
+![React Router 文件夹结构](./images/react-router.jpg "React Router 入门实战教学")
 
 ## 前言
 若你是从一开始一路走到这里读者请先给自己一个爱的鼓励吧！在经历了 React 基础的训练后，相信各位读者应该都等不及想大展拳脚了！接下来我们将进行比较复杂的应用程序开发并和读者介绍目前市场上常见的不刷页单页式应用程序（single page application）的设计方式。
@@ -16,7 +16,7 @@
 $ npm init
 ```
 
-安装相关套件（包含开发环境使用的套件）：
+安装相关包（包含开发环境使用的包）：
 
 ```shell
 $ npm install --save react react-dom react-router
@@ -26,9 +26,9 @@ $ npm install --save react react-dom react-router
 $ npm install --save-dev babel-core babel-eslint babel-loader babel-preset-es2015 babel-preset-react eslint eslint-config-airbnb eslint-loader eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react webpack webpack-dev-server html-webpack-plugin
 ```
 
-安装好后我们可以设计一下我们的资料夹结构，首先我们在根目录建立 `src` 和 `res` 资料夹，分别放置 `script` 的 `source` 和静态资源（如：全域使用的 `.css` 和图档）。在 `components` 资料夹中我们会放置所有 `components`（个别组件资料夹中会用 `index.js` 输出组件，让引入组件更简洁），其余设定档则放置于根目录下。
+安装好后我们可以设计一下我们的文件夹结构，首先我们在根目录建立 `src` 和 `res` 文件夹，分别放置 `script` 的 `source` 和静态资源（如：全域使用的 `.css` 和图档）。在 `components` 文件夹中我们会放置所有 `components`（个别组件文件夹中会用 `index.js` 输出组件，让引入组件更简洁），其余设定档则放置于根目录下。
 
-![React Router 资料夹结构](./images/folder.png "React Router 资料夹结构")
+![React Router 文件夹结构](./images/folder.png "React Router 文件夹结构")
 
 接下来我们先设定一下开发文档。
 
@@ -263,7 +263,7 @@ Repos.propTypes = {
 export default Repos;
 ```
 
-详细的代码读者可以参考范例资料夹，若读者跟著范例完成的话，可以在终端机上执行 `npm start`，并于浏览器 `http://localhost:8008`看到以下成果，当你点选连结时会切换对应组件并改变 `actived` 状态！
+详细的代码读者可以参考范例文件夹，若读者跟著范例完成的话，可以在终端机上执行 `npm start`，并于浏览器 `http://localhost:8008`看到以下成果，当你点选连结时会切换对应组件并改变 `actived` 状态！
 
 ![范例成果](./images/example.png "范例成果")
 
