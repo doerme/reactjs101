@@ -3,18 +3,18 @@
 ## 前言
 上一节我们了解了 Redux 基本的概念和特性后，本章我们要实际动手用 Redux、React Redux 结合 ImmutableJS 开发一个简单的 Todo 应用。话不多说，那就让让我们开始吧！
 
-以下这张图表示了整个 React Redux App 的数据流程图（使用者与 View 互动 => dispatch 出 Action => Reducers 依据 action tyoe 分配到对应处理方式，回传新的 state => 通过 React Redux 传送给 React，React 重新绘制 View）：
+以下这张图表示了整个 React Redux App 的数据流程图（使用者与 View 互动 => dispatch 出 Action => Reducers 依据 action type 分配到对应处理方式，回传新的 state => 通过 React Redux 传送给 React，React 重新绘制 View）：
 
 ![React Redux](./images/redux-flow.png "React Redux")
 
 ## 动手创作 React Redux ImmutableJS TodoApp
-在开始创作之前我们先完成一些开发的前置作业，先通过以下指令在根目录产生 npm 设定档 `package.json`：
+在开始创作之前我们先完成一些开发的前置作业，先通过以下指令在根目录产生 npm 配置文件 `package.json`：
 
 ```
 $ npm init
 ```
 
-安装相关套件（包含开发环境使用的套件）：
+安装相关包（包含开发环境使用的包）：
 
 ```
 $ npm install --save react react-dom redux react-redux immutable redux-actions redux-immutable
@@ -24,13 +24,13 @@ $ npm install --save react react-dom redux react-redux immutable redux-actions r
 $ npm install --save-dev babel-core babel-eslint babel-loader babel-preset-es2015 babel-preset-react eslint eslint-config-airbnb eslint-loader eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react html-webpack-plugin webpack webpack-dev-server
 ```
 
-安装好后我们可以设计一下我们的文件夹目录结构，首先我们在根目录建立 `src`，放置 `script` 的 `source` 。在 `components` 文件夹目录中我们会放置所有 `components`（个别元件文件夹目录中会用 `index.js` 输出元件，让引入元件更简洁）、`containers`（负责和 store 互动取得 state），另外还有 `actions`、`constants`、`reducers`、`store`，其余设定档则放置于根目录下。
+安装好后我们可以设计一下我们的文件夹目录结构，首先我们在根目录建立 `src`，放置 `script` 的 `source` 。在 `components` 文件夹目录中我们会放置所有 `components`（个别元件文件夹目录中会用 `index.js` 输出元件，让引入元件更简洁）、`containers`（负责和 store 互动取得 state），另外还有 `actions`、`constants`、`reducers`、`store`，其余配置文件则放置于根目录下。
 
 大致上的文件夹目录结构会长这样：
 
 ![React Redux](./images/redux-folder.png "React Redux")
 
-接下来我们参考上一章设定一下开发文档（`.babelrc`、`.eslintrc`、`webpack.config.js`）。这样我们就完成了开发环境的设定可以开始动手实作 `React Redux` 应用程式了！
+接下来我们参考上一章设定一下开发文档（`.babelrc`、`.eslintrc`、`webpack.config.js`）。这样我们就完成了开发环境的设定可以开始动手实践 `React Redux` 应用程式了！
 
 首先我们先用 Component 之眼感受一下我们应用程式，将它切成一个个 `Component`。在这边我们设计一个主要的 `Main` 包含两个子 Component：`TodoHeader`、`TodoList`。
 
@@ -59,7 +59,7 @@ $ npm install --save-dev babel-core babel-eslint babel-loader babel-preset-es201
 
 ![React Redux](./images/redux-store.png "React Redux")
 
-以下是 `src/index.js` 完整程式码： 
+以下是 `src/index.js` 完整代码： 
 
 ```javascript
 import React from 'react';
@@ -81,7 +81,6 @@ ReactDOM.render(
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactDOM from 'react-dom';
 import TodoHeaderContainer from '../../containers/TodoHeaderContainer';
 import TodoListContainer from '../../containers/TodoListContainer';
 
@@ -95,7 +94,7 @@ const Main = () => (
 export default Main;
 ```
 
-接下来我们定义一下 `Actions` 的部份，由于是范例 App 所以相对简单，这边只定义一个 todoActions。在这边我们使用了 [redux-actions](https://github.com/acdlite/redux-actions)，它可以方便我们使用 Flux Standard Action 格式的 action。以下是 `src/actions/todoActions.js` 完整程式码：
+接下来我们定义一下 `Actions` 的部份，由于是范例 App 所以相对简单，这边只定义一个 todoActions。在这边我们使用了 [redux-actions](https://github.com/acdlite/redux-actions)，它可以方便我们使用 Flux Standard Action 格式的 action。以下是 `src/actions/todoActions.js` 完整代码：
 
 ```javascript
 import { createAction } from 'redux-actions';
@@ -116,7 +115,7 @@ export const changeText = createAction('CHANGE_TEXT');
 export * from './todoActions';
 ```
 
-另外我们把 constants 放到 `components` 文件夹目录中方便管理，以下是 `src/constants/actionTypes.js` 程式码：
+另外我们把 constants 放到 `components` 文件夹目录中方便管理，以下是 `src/constants/actionTypes.js` 代码：
 
 ```javascript
 export const CREATE_TODO = 'CREATE_TODO';
@@ -136,9 +135,9 @@ export default keyMirror({
 */
 ```
 
-设定 Actions 后我们来讨论一下 Reducers 的部份。在讨论 Reducers 之前我们先来设定一下我们的前端的数据结构，在这边我们把所有数据结构（initialState）放到 `src/constants/models.js` 中。这边特别注意的是由于 Redux 中有一个重要特性是 `State is read-only`，也就是说更新当 reducers 进到 action 只会回传新的 state 不会更改到原有的 state。因此我们会在整个 Redux App 中使用 `ImmutableJS` 让整个数据流维持在 `Immutable` 的状态，也可以提升程式开发上的效能和避免不可预期的副作用。
+设定 Actions 后我们来讨论一下 Reducers 的部份。在讨论 Reducers 之前我们先来设定一下我们的前端的数据结构，在这边我们把所有数据结构（initialState）放到 `src/constants/models.js` 中。这边特别注意的是由于 Redux 中有一个重要特性是 `State is read-only`，也就是说更新当 reducers 进到 action 只会回传新的 state 不会更改到原有的 state。因此我们会在整个 Redux App 中使用 `ImmutableJS` 让整个数据流维持在 `Immutable` 的状态，也可以提升程式开发上的性能和避免不可预期的副作用。
 
-以下是 `src/constants/models.js` 完整程式码，其设定了 TodoState 的数据结构并使用 `fromJS()` 转成 `Immutable`：
+以下是 `src/constants/models.js` 完整代码，其设定了 TodoState 的数据结构并使用 `fromJS()` 转成 `Immutable`：
 
 ```javascript
 import Immutable from 'immutable';
@@ -154,7 +153,7 @@ export const TodoState = Immutable.fromJS({
 });
 ```
 
-接下来我们要讨论的是 Reducers 的部份，在 `todoReducers` 中我们会根据接收到的 action 进行 mapping 到对应的处理函式并传入夹带的 `payload` 数据（这边我们使用 [redux-actions](https://github.com/acdlite/redux-actions) 来进行 mapping，使用上比传统的 switch 更为简洁）。Reducers 接收到 action 的处理方式为 `(initialState, action) => newState`，最终会回传一个新的 state，而非更改原来的 state，所以这边我们使用 `ImmutableJS`。
+接下来我们要讨论的是 Reducers 的部份，在 `todoReducers` 中我们会根据接收到的 action 进行 mapping 到对应的处理函数并传入夹带的 `payload` 数据（这边我们使用 [redux-actions](https://github.com/acdlite/redux-actions) 来进行 mapping，使用上比传统的 switch 更为简洁）。Reducers 接收到 action 的处理方式为 `(initialState, action) => newState`，最终会回传一个新的 state，而非更改原来的 state，所以这边我们使用 `ImmutableJS`。
 
 ```javascript
 import { handleActions } from 'redux-actions';
@@ -193,7 +192,7 @@ export default handleActions({
 }, UiState); 
 ```
 
-虽然 Redux 本身仅会有一个 store，但 redux 本身有提供了 `combineReducers` 可以让我们切割我们 state 方便维护和管理。实上，state 的规划也是一们学问，通常需要不断地实作和工作团队讨论才能找到比较好的方式。不过这边要注意的是我们改使用了 `redux-immutable` 的 `combineReducers` 这样可以确保我们的 state 维持在 `Immutable` 的状态。    
+虽然 Redux 本身仅会有一个 store，但 redux 本身有提供了 `combineReducers` 可以让我们切割我们 state 方便维护和管理。实上，state 的规划也是一们学问，通常需要不断地实践和工作团队讨论才能找到比较好的方式。不过这边要注意的是我们改使用了 `redux-immutable` 的 `combineReducers` 这样可以确保我们的 state 维持在 `Immutable` 的状态。    
 
 由于 Redux 官方也没有特别明确或严谨的规范。在一般情况我会将 reducers 分为 `data` 和单纯和 UI 有关的 `ui` state。但由于这边是比较简单的例子，我们最终只使用到 `src/reducers/data/todoReducers.js`。 
 
@@ -239,7 +238,7 @@ export { default } from './configureStore';
 
 `connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])` 
 
-在我们的范例 App 中我们只会先用到前两个参数，第三个参数会在之后的例子里用到。第一个参数 mapStateToProps 是一个让开发者可以从 store 取出想要 state 并当做 props 往下传的功能，第二个参数则是将 dispatch 行为封装成函数顺著 props 可以方便往下传和呼叫。
+在我们的范例 App 中我们只会先用到前两个参数，第三个参数会在之后的例子里用到。第一个参数 mapStateToProps 是一个让开发者可以从 store 取出想要 state 并当做 props 往下传的功能，第二个参数则是将 dispatch 行为封装成函数顺著 props 可以方便往下传和调用。
 
 以下是 `src/components/TodoHeader/TodoHeader.js` 的部份：
 
@@ -343,7 +342,7 @@ const TodoList = ({
 export default TodoList;
 ```
 
-若是一切顺利的话就可以在浏览器上看到自己努力的成果啰！（因为我们有使用 `redux-logger` 所以打开 console 会看到 action 和 state 的变化情形，但记得在 `production` 环境要拿掉）
+若是一切顺利的话就可以在浏览器上看到自己努力的成果！（因为我们有使用 `redux-logger` 所以打开 console 会看到 action 和 state 的变化情形，但记得在 `production` 环境要拿掉）
 
 ![React Redux](./images/react-redux-dev-demo.png "React Redux")
 
@@ -358,4 +357,4 @@ export default TodoList;
 ## :door: 任意门
 | [回首页](https://github.com/kdchang/reactjs101) | [上一章：Redux 基础概念](https://github.com/kdchang/reactjs101/blob/master/Ch07/react-redux-real-world-example.md) | [下一章：Container 与 Presentational Components 入门](https://github.com/kdchang/reactjs101/blob/master/Ch08/container-presentational-component-.md) |
 
-| [勘误、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
+| [纠错、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
