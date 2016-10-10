@@ -11,7 +11,7 @@
 
 ![React Redux](./images/using-redux-compare.jpg "React Redux")
 
-在开始实作 Redux App 之前我们先来了解一下 Redux 和 Flux 的一些差异：
+在开始实际操作 Redux App 之前我们先来了解一下 Redux 和 Flux 的一些差异：
 
 1. 只使用一个 store 将整个应用程序的状态 (state) 用对象树 (object tree) 的方式储存起来：
 
@@ -39,7 +39,7 @@
 
 2. 唯一可以改变 state 的方法就是发送 action，这部份和 Flux 类似，但 Redux 并没有像 Flux 设计有 Dispatcher。Redux 的 action 和 Flux 的 action 都是一个包含 `type` 和 `payload` 的对象。
 
-3. Redux 拥有 Flux 所没有的 Reducer。Reducer 根据 action 的 type 去执行对应的 state 做变化的函式叫做 Reducer。你可以使用 switch 或是使用函式 mapping 的方式去对应处理的方式。 
+3. Redux 拥有 Flux 所没有的 Reducer。Reducer 根据 action 的 type 去执行对应的 state 做变化的函数叫做 Reducer。你可以使用 switch 或是使用函数 mapping 的方式去对应处理的方式。 
 
 4. Redux 拥有许多方便好用的辅助测试工具（例如：[redux-devtools](https://github.com/gaearon/redux-devtools)、[react-transform-boilerplate](https://github.com/gaearon/react-transform-boilerplate)），方便测试和使用 `Hot Module Reload`。
 
@@ -158,4 +158,4 @@ store.dispatch({ type: 'DECREMENT' });
 ## :door: 任意门
 | [回首页](https://github.com/kdchang/reactjs101) | [上一章：Flux 基础概念与实战入门](https://github.com/kdchang/reactjs101/blob/master/Ch07/react-flux-introduction.md) | [下一章：Redux 实战入门](https://github.com/kdchang/reactjs101/blob/master/Ch07/react-redux-real-world-example.md) |
 
-| [勘误、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
+| [纠错、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
