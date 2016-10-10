@@ -9,18 +9,18 @@
 1. Presentational Components  
   - 用途：怎么看事情（Markup、外观）
   - 是否让 Redux 意识到：否
-  - 取得资料方式：从 props 取得
-  - 改变资料方式：从 props 去呼叫 callback function
+  - 取得数据方式：从 props 取得
+  - 改变数据方式：从 props 去呼叫 callback function
   - 写入方式：手动处理
 
 2. Container Components
- - 用途：怎么做事情（撷取资料，更新 State）
+ - 用途：怎么做事情（采集数据，更新 State）
  - 是否让 Redux 意识到：是
- - 取得资料方式：订阅 Redux State（store）
- - 改变资料方式：Dispatch Redux Action
+ - 取得数据方式：订阅 Redux State（store）
+ - 改变数据方式：Dispatch Redux Action
  - 写入方式：从 React Redux 产生
 
- 从上面的分析读者可以发现，两者最大的差别在于 `Component` 主要负责单纯的 UI 的渲染，而 `Container` 则负责和 Redux 的 store 沟通，作为 `Redux` 和 `Component` 之间的桥梁。这样的分法可以让程式架构和职责更清楚，所以接下来我们就使用上一章节的 Redux TodoApp 进行改造，改造成 Container 与 Presentational Components 模式。
+ 从上面的分析读者可以发现，两者最大的差别在于 `Component` 主要负责单纯的 UI 的渲染，而 `Container` 则负责和 Redux 的 store 沟通，作为 `Redux` 和 `Component` 之间的桥梁。这样的分法可以让程序架构和职责更清楚，所以接下来我们就使用上一章节的 Redux TodoApp 进行改造，改造成 Container 与 Presentational Components 模式。
 
 ## Container Components
 
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // 当使用者在 input 输入资料值即会触发这个函数，发出 changeText action 并附上使用者输入内容 event.target.value
+  // 当使用者在 input 输入数据值即会触发这个函数，发出 changeText action 并附上使用者输入内容 event.target.value
   onChangeText: (event) => (
     dispatch(changeText({ text: event.target.value }))
   ),
@@ -116,7 +116,7 @@ export default TodoHeader;
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// Component 部分值的注意的是 todos state 是透过 map function 去迭代出元素，由于要让 React JSX 可以渲染并保持传入触发 event state 的 immutable，所以需使用 toJS() 转换 component of array。
+// Component 部分值的注意的是 todos state 是通过 map function 去迭代出元素，由于要让 React JSX 可以渲染并保持传入触发 event state 的 immutable，所以需使用 toJS() 转换 component of array。
 // 由 Component 传进欲删除元素的 index
 
 const TodoList = ({
@@ -141,7 +141,7 @@ export default TodoList;
 ```
 
 ## 总结
-That's it！透过区分 Container 与 Presentational Components 可以让程式架构和职责更清楚了！接下来我们将运用我们所学实际开发两个贴近生活的专案，让读者更加熟悉 React 生态系如何应用于实务上。
+That's it！通过区分 Container 与 Presentational Components 可以让程序架构和职责更清楚了！接下来我们将运用我们所学实际开发两个贴近生活的专案，让读者更加熟悉 React 生态系如何应用于实务上。
 
 ## 延伸阅读
 1. [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.vtcuxsurv)
@@ -152,4 +152,4 @@ That's it！透过区分 Container 与 Presentational Components 可以让程式
 ## :door: 任意门
 | [回首页](https://github.com/kdchang/reactjs101) | [上一章：Redux 实战入门](https://github.com/kdchang/reactjs101/blob/master/Ch07/react-redux-real-world-example.md) | [下一章：用 React + Router + Redux + ImmutableJS 写一个 Github 查询应用](https://github.com/kdchang/reactjs101/blob/master/Ch09/react-router-redux-github-finder.md) |
 
-| [勘误、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
+| [纠错、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
