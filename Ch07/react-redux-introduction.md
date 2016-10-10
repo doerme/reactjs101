@@ -3,7 +3,7 @@
 ![React Redux](./images/redux-logo.png "React Redux")
 
 ## 前言
-前面一个章节我们讲解了 Flux 的功能和用法，但在实务上许多开发者较偏好的是同为 Flux-like 但较为简洁且文件丰富清楚的 [Redux](http://redux.js.org/index.html) 当作状态资料管理的架构。Redux 是由 Dan Abramov 所发起的一个开源的 library，其主要功能如官方首页写著：`Redux is a predictable state container for JavaScript apps.`，亦即 Redux 希望能提供一个可以预测的 state 管理容器，让开发者可以可以更容易开发复杂的 JavaScript 应用程式（注意 Redux 和 React 并无相依性，只是和 React 可以有很好的整合）。
+前面一个章节我们讲解了 Flux 的功能和用法，但在实务上许多开发者较偏好的是同为 Flux-like 但较为简洁且文件丰富清楚的 [Redux](http://redux.js.org/index.html) 当作状态数据管理的架构。Redux 是由 Dan Abramov 所发起的一个开源的 library，其主要功能如官方首页写著：`Redux is a predictable state container for JavaScript apps.`，亦即 Redux 希望能提供一个可以预测的 state 管理容器，让开发者可以可以更容易开发复杂的 JavaScript 应用程序（注意 Redux 和 React 并无相依性，只是和 React 可以有很好的整合）。
 
 ## Flux/Redux 超级比一比
 
@@ -13,9 +13,9 @@
 
 在开始实作 Redux App 之前我们先来了解一下 Redux 和 Flux 的一些差异：
 
-1. 只使用一个 store 将整个应用程式的状态 (state) 用物件树 (object tree) 的方式储存起来：
+1. 只使用一个 store 将整个应用程序的状态 (state) 用对象树 (object tree) 的方式储存起来：
 
-	原生的 Flux 会有许多分散的 store 储存各个不同的状态，但在 redux 中，只会有唯一一个 store 将所有的资料用物件的方式包起来。
+	原生的 Flux 会有许多分散的 store 储存各个不同的状态，但在 redux 中，只会有唯一一个 store 将所有的数据用对象的方式包起来。
 
 	```javascript
 	//原生 Flux 的 store
@@ -37,7 +37,7 @@
 	}
 	```
 
-2. 唯一可以改变 state 的方法就是发送 action，这部份和 Flux 类似，但 Redux 并没有像 Flux 设计有 Dispatcher。Redux 的 action 和 Flux 的 action 都是一个包含 `type` 和 `payload` 的物件。
+2. 唯一可以改变 state 的方法就是发送 action，这部份和 Flux 类似，但 Redux 并没有像 Flux 设计有 Dispatcher。Redux 的 action 和 Flux 的 action 都是一个包含 `type` 和 `payload` 的对象。
 
 3. Redux 拥有 Flux 所没有的 Reducer。Reducer 根据 action 的 type 去执行对应的 state 做变化的函式叫做 Reducer。你可以使用 switch 或是使用函式 mapping 的方式去对应处理的方式。 
 
@@ -47,7 +47,7 @@
 
 ![React Redux](./images/redux-flowchart.png "React Redux")
 
-从上述的图中我们可以看到 Redux 资料流的模型大致上可以简化成： `View -> Action -> (Middleware) -> Reducer`。当使用者和 View 互动时会触发事件发出 Action，若有使用 Middleware 的话会在进入 Reducer 进行一些处理，当 Action 进到 Reducer 时，Reducer 会根据，action type 去 mapping 对应处理的动作，然后回传回新的 state。View 则因为侦测到 state 更新而重绘页面。在这个章节我们讨论的是 synchronous（同步）的情形，asynchronous（非同步）的状况会在接下来的章节进行讨论。以下就用官方网站上的简单范例来让大家感受一下 Redux 的整个使用流程：
+从上述的图中我们可以看到 Redux 数据流的模型大致上可以简化成： `View -> Action -> (Middleware) -> Reducer`。当使用者和 View 互动时会触发事件发出 Action，若有使用 Middleware 的话会在进入 Reducer 进行一些处理，当 Action 进到 Reducer 时，Reducer 会根据，action type 去 mapping 对应处理的动作，然后回传回新的 state。View 则因为侦测到 state 更新而重绘页面。在这个章节我们讨论的是 synchronous（同步）的情形，asynchronous（非同步）的状况会在接下来的章节进行讨论。以下就用官方网站上的简单范例来让大家感受一下 Redux 的整个使用流程：
 
 ```javascript
 import { createStore } from 'redux';
@@ -122,7 +122,7 @@ store.dispatch({ type: 'DECREMENT' });
 
 5. bindActionCreators：`bindActionCreators(actionCreators, dispatch)`
 
-	bindActionCreators 可以将 `actionCreators` 和 `dispatch` 绑定，并回传一个 Function 或 Object，让程式更简洁。但若是使用 react-redux 可以用 `connect` 让 dispatch 行为更容易管理
+	bindActionCreators 可以将 `actionCreators` 和 `dispatch` 绑定，并回传一个 Function 或 Object，让程序更简洁。但若是使用 react-redux 可以用 `connect` 让 dispatch 行为更容易管理
 
 6. compose：`compose(...functions)`
 	
